@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Food Health Analyzer</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="card">
+  <div class="header">
+    <i class="fas fa-utensils logo"></i>
+    <h1>FOOD HEALTH ANALYZER</h1>
+  </div>
+  <p class="sub">Upload a food photo or search any food to get nutrition facts and health insights.</p>
+
+  <div class="tabs">
+    <button class="tab active" data-panel="textPanel"><i class="fas fa-search"></i> Search Food</button>
+    <button class="tab" data-panel="imagePanel"><i class="fas fa-camera"></i> Upload Photo</button>
+  </div>
+
+  <!-- TEXT PANEL -->
+  <div class="panel active" id="textPanel">
+    <div class="search-wrap">
+      <div class="field">
+        <i class="fas fa-search"></i>
+        <input type="text" id="foodInput" placeholder="Search any food (e.g., fried chicken, pizza, mango...)" autocomplete="off">
+      </div>
+      <button class="btn" id="analyzeBtn"><i class="fas fa-microscope"></i> Analyze</button>
+    </div>
+    <div class="status" id="textStatus">
+      <div class="spin"></div><span id="textStatusText">Analyzing…</span>
+      <button class="cancel" id="textCancel">Cancel</button>
+    </div>
+    <div class="err" id="textErr"><i class="fas fa-exclamation-circle"></i><span id="textErrText"></span></div>
+  </div>
+
+  <!-- IMAGE PANEL -->
+  <div class="panel" id="imagePanel">
+    <div class="upload" id="uploadZone">
+      <i class="fas fa-cloud-upload-alt big"></i>
+      <h3>Drop a food photo here</h3>
+      <p>or click to browse — JPG, PNG, GIF, WebP · up to 5MB</p>
+      <input type="file" id="fileInput" accept="image/jpeg,image/png,image/gif,image/webp">
+    </div>
+
+    <div class="preview" id="previewWrap">
+      <img class="preview-img" id="previewImg" alt="Food preview">
+      <div class="preview-actions">
+        <button class="btn" id="analyzeImageBtn"><i class="fas fa-wand-magic-sparkles"></i> Analyze Photo</button>
+        <button class="btn btn-ghost" id="changeBtn"><i class="fas fa-sync-alt"></i> Change</button>
+        <button class="btn btn-danger" id="removeBtn"><i class="fas fa-times"></i> Remove</button>
+      </div>
+    </div>
+
+    <div class="status" id="imageStatus">
+      <div class="spin"></div><span id="imageStatusText">Analyzing your photo…</span>
+      <button class="cancel" id="imageCancel">Cancel</button>
+    </div>
+    <div class="err" id="imageErr"><i class="fas fa-exclamation-circle"></i><span id="imageErrText"></span></div>
+
+    <div style="margin-top:1rem;text-align:center;">
+      <p style="font-size:.8rem;color:var(--muted);margin-bottom:.5rem;">No photo handy? Try a sample:</p>
+      <div style="display:flex;gap:.6rem;flex-wrap:wrap;justify-content:center;">
+        <div class="chip" data-sample="apple">🍎 Apple</div>
+        <div class="chip" data-sample="friedchicken">🍗 Fried Chicken</div>
+        <div class="chip" data-sample="pizza">🍕 Pizza</div>
+        <div class="chip" data-sample="salmon">🐟 Salmon</div>
+        <div class="chip" data-sample="broccoli">🥦 Broccoli</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RESULT -->
+  <div class="result" id="result">
+    <div class="res-head">
+      <div class="res-title">
+        <i class="fas fa-apple-alt" id="foodIcon"></i>
+        <div>
+          <h2 id="foodName">—</h2>
+          <span class="cat" id="foodCat">—</span>
+        </div>
+      </div>
+      <div class="badge"><i class="fas fa-heartbeat"></i> <span id="healthGrade">—</span></div>
+    </div>
+
+    <div class="serving">
+      <label for="servingInput"><i class="fas fa-weight-hanging"></i> Serving:</label>
+      <input type="number" id="servingInput" value="100" min="1" max="2000" step="1">
+      <span style="font-size:.8rem;color:var(--muted);">grams</span>
+      <span class="hint">Nutrients scale with serving size</span>
+    </div>
+
+    <div class="macro">
+      <div class="m-p" id="barP" style="width:20%"></div>
+      <div class="m-c" id="barC" style="width:60%"></div>
+      <div class="m-f" id="barF" style="width:20%"></div>
+    </div>
+    <div class="legend">
+      <span><span class="dot" style="background:#40916c;"></span> Protein <b id="pctP">0%</b></span>
+      <span><span class="dot" style="background:#e0a458;"></span> Carbs <b id="pctC">0%</b></span>
+      <span><span class="dot" style="background:#c9776a;"></span> Fat <b id="pctF">0%</b></span>
+    </div>
+
+    <div class="grid" id="nutrientGrid"></div>
+
+    <div class="insight">
+      <i class="fas fa-lightbulb"></i>
+      <div>
+        <h4>Health Insight</h4>
+        <p id="insightText">—</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="empty" id="emptyState">
+    <i class="fas fa-seedling"></i>
+    <p>Search a food or upload a photo to see nutrition & health score</p>
+  </div>
+
+  <div class="foot">
+    <i class="fas fa-database"></i> Nutrition values per 100g · Not medical advice
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
